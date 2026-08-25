@@ -266,6 +266,100 @@ document.querySelector('#app').innerHTML = `
         </div>
       </div>
     </section>
+
+    <section class="section merch-section" id="merch" aria-labelledby="merch-title">
+      <div class="container">
+        <div class="section-heading merch-heading">
+          <div>
+            <p class="eyebrow">Фирменный мерч</p>
+            <h2 id="merch-title">Худи КриптоАРМ</h2>
+          </div>
+          <p>
+            Варианты нанесения фирменной графики и примеры того,
+            как худи выглядит в образе.
+          </p>
+        </div>
+
+        <div class="merch-product-grid" aria-label="Виды худи">
+          <figure class="merch-product-card">
+            <figcaption class="merch-card-head">
+              <span>01</span>
+              <strong>Вид спереди</strong>
+            </figcaption>
+            <div class="merch-product-frame">
+              <img
+                src="${baseUrl}merch/hoodie-front.webp"
+                alt="Красное худи КриптоАРМ, вид спереди"
+                width="1600"
+                height="2107"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </figure>
+
+          <figure class="merch-product-card">
+            <figcaption class="merch-card-head">
+              <span>02</span>
+              <strong>Вид сзади</strong>
+            </figcaption>
+            <div class="merch-product-frame">
+              <img
+                src="${baseUrl}merch/hoodie-back.webp"
+                alt="Красное худи КриптоАРМ, вид сзади"
+                width="1600"
+                height="2107"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </figure>
+        </div>
+
+        <div class="merch-lookbook-head">
+          <h3>На моделях</h3>
+          <p>Фронтальный и задний виды в студийной и городской среде.</p>
+        </div>
+
+        <div class="merch-lookbook-grid" aria-label="Худи КриптоАРМ на моделях">
+          <figure class="merch-lookbook-card">
+            <img
+              src="${baseUrl}merch/hoodie-models-studio.webp"
+              alt="Мужчина и женщина в худи КриптоАРМ, вид спереди и сзади"
+              width="1023"
+              height="1537"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>Передняя и задняя стороны</figcaption>
+          </figure>
+
+          <figure class="merch-lookbook-card">
+            <img
+              src="${baseUrl}merch/hoodie-back-city.webp"
+              alt="Женщина в худи КриптоАРМ, вид сзади"
+              width="1024"
+              height="1536"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>Вид сзади</figcaption>
+          </figure>
+
+          <figure class="merch-lookbook-card">
+            <img
+              src="${baseUrl}merch/hoodie-front-studio.webp"
+              alt="Мужчина в худи КриптоАРМ, вид спереди"
+              width="1054"
+              height="1492"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>Вид спереди</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
