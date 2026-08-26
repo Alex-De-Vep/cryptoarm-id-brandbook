@@ -185,11 +185,10 @@ document.querySelector('#app').innerHTML = `
       <div class="container">
         <div class="hero-panel">
           <div class="hero-copy">
-            <p class="eyebrow">Бренд-материалы КриптоАРМ</p>
-            <h1>Логотипы продуктов — в нужном формате и размере.</h1>
+            <h1>Бренд-материалы КриптоАРМ</h1>
             <p class="hero-description">
               Всё необходимое для аккуратного использования бренда: оригинальные знаки,
-              прозрачные PNG и палитра интерфейса.
+              прозрачные PNG и палитра интерфейса, мерч компании. 
             </p>
             <div class="hero-actions">
               <a class="button button-primary button-large" href="#logos">
