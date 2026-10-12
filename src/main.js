@@ -1,7 +1,7 @@
 import './styles.css';
 
 const baseUrl = import.meta.env.BASE_URL;
-const pngSizes = [256, 512, 1024, 2048];
+const pngSizes = [96, 128, 256, 512, 1024, 2048];
 
 const products = [
   {
@@ -192,10 +192,9 @@ document.querySelector('#app').innerHTML = `
             </p>
             <div class="hero-actions">
               <a class="button button-primary button-large" href="#logos">
-                Смотреть логотипы
+                Перейти к логотипам
                 ${icons.chevron}
               </a>
-              <a class="text-link" href="#colors">Перейти к цветам</a>
             </div>
           </div>
 
@@ -222,7 +221,7 @@ document.querySelector('#app').innerHTML = `
             </div>
             <div class="hero-stats" aria-label="Состав материалов">
               <div><strong>4</strong><span>продукта</span></div>
-              <div><strong>4</strong><span>размера PNG</span></div>
+              <div><strong>${pngSizes.length}</strong><span>размеров PNG</span></div>
               <div><strong>SVG</strong><span>без потери качества</span></div>
             </div>
           </div>
