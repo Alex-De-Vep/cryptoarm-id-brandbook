@@ -604,18 +604,39 @@ svg {
 }
 
 .colors-section {
+  padding-block: clamp(48px, 6vw, 80px);
   background: var(--canvas);
+}
+
+.colors-intro {
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.colors-intro .eyebrow {
+  margin-bottom: 10px;
+  font-size: 11px;
+}
+
+.colors-intro h2 {
+  font-size: clamp(28px, 3.2vw, 44px);
+  line-height: 1.1;
+}
+
+.colors-intro > p {
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .palette-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
+  gap: 12px;
 }
 
 .accent-palette {
-  margin-top: clamp(64px, 8vw, 112px);
-  padding-top: clamp(48px, 6vw, 80px);
+  margin-top: 36px;
+  padding-top: 28px;
   border-top: 1px solid rgb(0 0 0 / 12%);
 }
 
@@ -623,8 +644,8 @@ svg {
   color: var(--palette-accent);
 }
 
-.accent-palette-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+.accent-palette .colors-intro h2 {
+  font-size: clamp(22px, 2.4vw, 30px);
 }
 
 .accent-palette-grid .color-card:first-child {
@@ -635,7 +656,7 @@ svg {
   min-width: 0;
   overflow: hidden;
   border: 1px solid rgb(0 0 0 / 9%);
-  border-radius: 20px;
+  border-radius: 14px;
   background: var(--surface);
 }
 
@@ -645,7 +666,7 @@ svg {
 
 .color-swatch {
   position: relative;
-  min-height: 190px;
+  min-height: 80px;
   background: var(--swatch);
 }
 
@@ -655,8 +676,8 @@ svg {
 
 .swatch-value {
   position: absolute;
-  top: 18px;
-  right: 18px;
+  top: 12px;
+  right: 12px;
   padding: 6px 9px;
   border-radius: 999px;
   background: rgb(255 255 255 / 70%);
@@ -675,18 +696,25 @@ svg {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  padding: 18px;
+  gap: 10px;
+  min-height: 78px;
+  padding: 12px;
+}
+
+.color-info > div {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .color-info h3 {
-  font-size: 17px;
+  font-size: 14px;
+  line-height: 1.2;
   font-weight: 680;
   letter-spacing: -0.025em;
 }
 
 .color-info p {
-  margin-top: 5px;
+  margin-top: 4px;
   color: var(--text-secondary);
   font-size: 12px;
   line-height: 1.35;
@@ -694,14 +722,15 @@ svg {
 
 .copy-button {
   flex: 0 0 auto;
-  min-height: 42px;
+  width: 40px;
+  min-height: 40px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 0 12px;
+  padding: 0;
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 10px;
   background: var(--soft-surface);
   cursor: pointer;
   font-size: 12px;
@@ -1025,8 +1054,7 @@ svg {
     padding: 12px 14px;
   }
 
-  .section-heading h2,
-  .colors-intro h2 {
+  .section-heading h2 {
     font-size: 42px;
   }
 
@@ -1063,7 +1091,7 @@ svg {
   }
 
   .color-swatch {
-    min-height: 150px;
+    min-height: 64px;
   }
 
   .merch-product-grid,

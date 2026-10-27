@@ -196,9 +196,10 @@ function renderColorCard(color) {
           type="button"
           data-copy-color="${color.value}"
           aria-label="Копировать цвет ${color.value}"
+          title="Копировать цвет ${color.value}"
         >
           <span class="copy-icon">${icons.copy}</span>
-          <span class="copy-label">Копировать</span>
+          <span class="copy-label sr-only">Копировать</span>
         </button>
       </div>
     </article>
