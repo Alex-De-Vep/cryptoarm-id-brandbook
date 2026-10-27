@@ -28,6 +28,30 @@ const products = [
     shortName: 'СКЗИ',
     description: 'Знак продукта для материалов о средствах криптографической защиты информации.',
   },
+  {
+    id: 'lunch',
+    name: 'Корпоративные обеды',
+    shortName: 'Корпоративные обеды',
+    assetName: 'lunch-logo-round',
+    family: 'Корпоративный сервис',
+    description: 'Круглый знак продукта в фирменном зелёном цвете.',
+    accent: '#7ABC2F',
+    accentHover: '#6BA629',
+    accentText: '#365A16',
+    surface: '#F2F8EA',
+  },
+  {
+    id: 'oidc',
+    name: 'OIDC Тест-инструмент',
+    shortName: 'OIDC Тест-инструмент',
+    assetName: 'oidc-test-tool',
+    family: 'Инструмент тестирования',
+    description: 'Знак инструмента тестирования OpenID Connect (OIDC).',
+    accent: '#1774FF',
+    accentHover: '#3486FF',
+    accentText: '#184EA8',
+    surface: '#EDF4FF',
+  },
 ];
 
 const palette = [
@@ -42,6 +66,20 @@ const palette = [
   { name: 'Основной фон', role: 'Фон страницы', value: '#E2E1E5' },
   { name: 'Вложенная поверхность', role: 'Поля и мягкие блоки', value: '#F9FAFB' },
   { name: 'Поверхность', role: 'Карточки и панели', value: '#FFFFFF', bordered: true },
+];
+
+const lunchPalette = [
+  { name: 'Основной зелёный', role: 'Фирменный цвет логотипа', value: '#7ABC2F' },
+  { name: 'Тёмный зелёный', role: 'Текст и иконки на светлом фоне', value: '#365A16', inverse: true },
+  { name: 'Светлый зелёный', role: 'Выделения и акцентные плашки', value: '#D7EBBE' },
+  { name: 'Мягкий зелёный', role: 'Фон блоков и поверхностей', value: '#F2F8EA' },
+];
+
+const oidcPalette = [
+  { name: 'Основной синий', role: 'Центральный цвет градиента', value: '#1774FF' },
+  { name: 'Фиолетовый', role: 'Начало градиента', value: '#6235FF', inverse: true },
+  { name: 'Бирюзовый', role: 'Завершение градиента', value: '#18D0E8' },
+  { name: 'Глубокий синий', role: 'Цвет свечения в логотипе', value: '#003FFF', inverse: true },
 ];
 
 const icons = {
@@ -68,17 +106,18 @@ function assetPath(filename) {
   return `${baseUrl}logos/${filename}`;
 }
 
-function productFilename(productId, extension, size) {
+function productFilename(product, extension, size) {
   const suffix = size ? `-${size}` : '';
-  return `cryptoarm-${productId}${suffix}.${extension}`;
+  return `${product.assetName || `cryptoarm-${product.id}`}${suffix}.${extension}`;
 }
 
 function renderProductCard(product, index) {
-  const svgFilename = productFilename(product.id, 'svg');
-  const defaultPng = productFilename(product.id, 'png', 1024);
+  const svgFilename = productFilename(product, 'svg');
+  const defaultPng = productFilename(product, 'png', 1024);
 
   return `
-    <article class="product-card" aria-labelledby="product-${product.id}">
+    <article class="product-card" aria-labelledby="product-${product.id}"
+      ${product.accent ? `style="--product-accent: ${product.accent}; --product-accent-hover: ${product.accentHover}; --product-accent-text: ${product.accentText}; --product-surface: ${product.surface}; --product-button-text: var(--text);"` : ''}>
       <div class="product-preview">
         <div class="product-index" aria-hidden="true">0${index + 1}</div>
         <img
@@ -91,7 +130,7 @@ function renderProductCard(product, index) {
       </div>
       <div class="product-content">
         <div class="product-copy">
-          <p class="product-family">Продукт КриптоАРМ</p>
+          <p class="product-family">${product.family || 'Продукт КриптоАРМ'}</p>
           <h3 id="product-${product.id}">${product.name}</h3>
           <p>${product.description}</p>
         </div>
@@ -209,7 +248,7 @@ document.querySelector('#app').innerHTML = `
                   (product) => `
                     <div class="cluster-item">
                       <img
-                        src="${assetPath(productFilename(product.id, 'svg'))}"
+                        src="${assetPath(productFilename(product, 'svg'))}"
                         alt=""
                         width="92"
                         height="92"
@@ -220,7 +259,7 @@ document.querySelector('#app').innerHTML = `
                 .join('')}
             </div>
             <div class="hero-stats" aria-label="Состав материалов">
-              <div><strong>4</strong><span>продукта</span></div>
+              <div><strong>${products.length}</strong><span>продуктов</span></div>
               <div><strong>${pngSizes.length}</strong><span>размеров PNG</span></div>
               <div><strong>SVG</strong><span>без потери качества</span></div>
             </div>
@@ -262,6 +301,36 @@ document.querySelector('#app').innerHTML = `
         <div class="palette-grid">
           ${palette.map(renderColorCard).join('')}
         </div>
+        <section class="accent-palette" aria-labelledby="lunch-colors-title" style="--palette-accent: #365A16">
+          <div class="colors-intro">
+            <div>
+              <p class="eyebrow">Акцентные цвета</p>
+              <h2 id="lunch-colors-title">Корпоративные обеды</h2>
+            </div>
+            <p>
+              Основной зелёный взят из логотипа. Дополнительные оттенки подобраны
+              для текста, выделений и мягких фоновых поверхностей.
+            </p>
+          </div>
+          <div class="palette-grid accent-palette-grid">
+            ${lunchPalette.map(renderColorCard).join('')}
+          </div>
+        </section>
+        <section class="accent-palette" aria-labelledby="oidc-colors-title" style="--palette-accent: #184EA8">
+          <div class="colors-intro">
+            <div>
+              <p class="eyebrow">Акцентные цвета</p>
+              <h2 id="oidc-colors-title">OIDC Тест-инструмент</h2>
+            </div>
+            <p>
+              Основной синий, фиолетовый и бирюзовый образуют градиент логотипа.
+              Глубокий синий используется в слое свечения. Все цвета взяты из SVG.
+            </p>
+          </div>
+          <div class="palette-grid accent-palette-grid">
+            ${oidcPalette.map(renderColorCard).join('')}
+          </div>
+        </section>
       </div>
     </section>
 
@@ -382,8 +451,10 @@ document.addEventListener('change', (event) => {
   if (!select) return;
 
   const productId = select.dataset.sizeSelect;
+  const product = products.find((item) => item.id === productId);
+  if (!product) return;
   const download = document.querySelector(`[data-png-download="${productId}"]`);
-  const filename = productFilename(productId, 'png', select.value);
+  const filename = productFilename(product, 'png', select.value);
 
   download.href = assetPath(filename);
   download.download = filename;

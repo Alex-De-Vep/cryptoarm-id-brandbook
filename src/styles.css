@@ -355,18 +355,21 @@ svg {
 }
 
 .cluster-item {
+  min-width: 0;
   min-height: 160px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 14px;
+  padding: 12px;
   border: 1px solid var(--border);
   border-radius: 20px;
   background: var(--surface);
   font-size: 13px;
   font-weight: 700;
   text-align: center;
+  overflow-wrap: anywhere;
 }
 
 .cluster-item img {
@@ -450,6 +453,15 @@ svg {
   background: var(--surface);
 }
 
+.product-card .button-primary {
+  background: var(--product-accent, var(--interactive));
+  color: var(--product-button-text, var(--surface));
+}
+
+.product-card .button-primary:hover {
+  background: var(--product-accent-hover, var(--interactive-hover));
+}
+
 .product-preview {
   position: relative;
   min-height: 330px;
@@ -457,7 +469,7 @@ svg {
   place-items: center;
   overflow: hidden;
   border-bottom: 1px solid var(--border);
-  background: var(--canvas);
+  background: var(--product-surface, var(--canvas));
 }
 
 .product-preview::after {
@@ -510,7 +522,7 @@ svg {
 
 .product-family {
   margin-bottom: 10px;
-  color: var(--interactive);
+  color: var(--product-accent-text, var(--interactive));
   font-size: 12px;
   font-weight: 750;
   letter-spacing: 0.09em;
@@ -599,6 +611,24 @@ svg {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
+}
+
+.accent-palette {
+  margin-top: clamp(64px, 8vw, 112px);
+  padding-top: clamp(48px, 6vw, 80px);
+  border-top: 1px solid rgb(0 0 0 / 12%);
+}
+
+.accent-palette .eyebrow {
+  color: var(--palette-accent);
+}
+
+.accent-palette-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.accent-palette-grid .color-card:first-child {
+  grid-column: auto;
 }
 
 .color-card {
@@ -853,6 +883,10 @@ svg {
 
   .palette-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .accent-palette-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
