@@ -1,7 +1,7 @@
 import './styles.css';
 
 const baseUrl = import.meta.env.BASE_URL;
-const pngSizes = [96, 128, 256, 512, 1024, 2048];
+const imageSizes = [96, 128, 256, 512, 1024, 2048];
 
 const products = [
   {
@@ -119,6 +119,7 @@ function productFilename(product, extension, size) {
 
 function renderProductCard(product, index) {
   const svgFilename = productFilename(product, 'svg');
+  const defaultSvg = productFilename(product, 'svg', 1024);
   const defaultPng = productFilename(product, 'png', 1024);
 
   return `
@@ -142,35 +143,40 @@ function renderProductCard(product, index) {
         </div>
 
         <div class="download-panel">
-          <a
-            class="button button-secondary"
-            href="${assetPath(svgFilename)}"
-            download="${svgFilename}"
-            data-download-label="${product.name}, SVG"
-          >
-            ${icons.arrowDown}
-            <span>Скачать SVG</span>
-          </a>
+          <label class="size-select">
+            <span class="sr-only">Размер SVG и PNG для ${product.name}</span>
+            <select data-size-select="${product.id}" aria-label="Размер SVG и PNG для ${product.name}">
+              ${imageSizes
+                .map(
+                  (size) =>
+                    `<option value="${size}" ${size === 1024 ? 'selected' : ''}>${size} × ${size} px</option>`,
+                )
+                .join('')}
+            </select>
+            <span class="select-chevron" aria-hidden="true">${icons.chevron}</span>
+          </label>
 
-          <div class="png-download">
-            <label class="size-select">
-              <span class="sr-only">Размер PNG для ${product.name}</span>
-              <select data-size-select="${product.id}" aria-label="Размер PNG для ${product.name}">
-                ${pngSizes
-                  .map(
-                    (size) =>
-                      `<option value="${size}" ${size === 1024 ? 'selected' : ''}>${size} px</option>`,
-                  )
-                  .join('')}
-              </select>
-              <span class="select-chevron" aria-hidden="true">${icons.chevron}</span>
-            </label>
+          <div class="download-actions">
+            <a
+              class="button button-secondary"
+              href="${assetPath(defaultSvg)}"
+              download="${defaultSvg}"
+              data-svg-download="${product.id}"
+              data-product-name="${product.name}"
+              data-download-label="${product.name}, SVG, 1024 × 1024 px"
+              aria-label="Скачать ${product.name} в SVG, 1024 на 1024 пикселей"
+            >
+              ${icons.arrowDown}
+              <span>Скачать SVG</span>
+            </a>
             <a
               class="button button-primary"
               href="${assetPath(defaultPng)}"
               download="${defaultPng}"
               data-png-download="${product.id}"
               data-product-name="${product.name}"
+              data-download-label="${product.name}, PNG, 1024 × 1024 px"
+              aria-label="Скачать ${product.name} в PNG, 1024 на 1024 пикселей"
             >
               ${icons.arrowDown}
               <span>Скачать PNG</span>
@@ -267,7 +273,7 @@ document.querySelector('#app').innerHTML = `
             </div>
             <div class="hero-stats" aria-label="Состав материалов">
               <div><strong>${products.length}</strong><span>продуктов</span></div>
-              <div><strong>${pngSizes.length}</strong><span>размеров PNG</span></div>
+              <div><strong>${imageSizes.length}</strong><span>размеров изображений</span></div>
               <div><strong>SVG</strong><span>без потери качества</span></div>
             </div>
           </div>
@@ -460,15 +466,19 @@ document.addEventListener('change', (event) => {
   const productId = select.dataset.sizeSelect;
   const product = products.find((item) => item.id === productId);
   if (!product) return;
-  const download = document.querySelector(`[data-png-download="${productId}"]`);
-  const filename = productFilename(product, 'png', select.value);
+  for (const format of ['svg', 'png']) {
+    const download = document.querySelector(`[data-${format}-download="${productId}"]`);
+    const filename = productFilename(product, format, select.value);
+    const formatLabel = format.toUpperCase();
 
-  download.href = assetPath(filename);
-  download.download = filename;
-  download.setAttribute(
-    'aria-label',
-    `Скачать ${download.dataset.productName} в PNG, ${select.value} на ${select.value} пикселей`,
-  );
+    download.href = assetPath(filename);
+    download.download = filename;
+    download.dataset.downloadLabel = `${product.name}, ${formatLabel}, ${select.value} × ${select.value} px`;
+    download.setAttribute(
+      'aria-label',
+      `Скачать ${product.name} в ${formatLabel}, ${select.value} на ${select.value} пикселей`,
+    );
+  }
 });
 
 document.addEventListener('click', async (event) => {

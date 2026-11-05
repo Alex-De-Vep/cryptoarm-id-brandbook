@@ -564,10 +564,10 @@ svg {
   border-top: 1px solid var(--border);
 }
 
-.png-download {
+.download-actions {
   min-width: 0;
   display: grid;
-  grid-template-columns: minmax(96px, 1fr) minmax(0, 1.6fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
 }
 
@@ -963,6 +963,17 @@ svg {
   .section-heading > p,
   .colors-intro > p {
     justify-self: start;
+  }
+
+  .product-card .button {
+    gap: 4px;
+    padding-inline: 6px;
+    font-size: 12px;
+  }
+
+  .product-card .button svg {
+    width: 16px;
+    height: 16px;
   }
 
   .palette-grid {
