@@ -6,27 +6,33 @@ const pngSizes = [96, 128, 256, 512, 1024, 2048];
 const products = [
   {
     id: 'cr',
-    name: 'КриптоАРМ Центр регистрации',
+    name: 'Центр регистрации',
     shortName: 'Центр регистрации',
-    description: 'Знак продукта для материалов о выпуске и управлении цифровыми сертификатами.',
+    description: 'Логотип продукта для выпуска и управления цифровыми сертификатами.',
   },
   {
     id: 'idm',
-    name: 'КриптоАРМ IDM',
+    name: 'IDM',
     shortName: 'IDM',
-    description: 'Знак системы управления учётными записями, ролями и правами доступа.',
+    description: 'Логотип продукта для управления учётными записями, ролями и правами доступа.',
   },
   {
     id: 'id',
-    name: 'КриптоАРМ ID',
+    name: 'ID',
     shortName: 'ID',
-    description: 'Знак платформы идентификации и аутентификации пользователей.',
+    description: 'Логотип продукта для идентификации и аутентификации пользователей.',
   },
   {
     id: 'skzi',
-    name: 'КриптоАРМ СКЗИ',
+    name: 'СКЗИ',
     shortName: 'СКЗИ',
-    description: 'Знак продукта для материалов о средствах криптографической защиты информации.',
+    description: 'Логотип продукта для криптографической защиты информации.',
+  },
+  {
+    id: 'pdn',
+    name: 'PDn',
+    shortName: 'PDn',
+    description: 'Логотип продукта PDn.',
   },
   {
     id: 'lunch',
@@ -34,7 +40,7 @@ const products = [
     shortName: 'Корпоративные обеды',
     assetName: 'lunch-logo-round',
     family: 'Корпоративный сервис',
-    description: 'Круглый знак продукта в фирменном зелёном цвете.',
+    description: 'Логотип продукта «Корпоративные обеды» в фирменном зелёном цвете.',
     accent: '#7ABC2F',
     accentHover: '#6BA629',
     accentText: '#365A16',
@@ -46,7 +52,7 @@ const products = [
     shortName: 'OIDC Тест-инструмент',
     assetName: 'oidc-test-tool',
     family: 'Инструмент тестирования',
-    description: 'Знак инструмента тестирования OpenID Connect (OIDC).',
+    description: 'Логотип продукта для тестирования OpenID Connect (OIDC).',
     accent: '#1774FF',
     accentHover: '#3486FF',
     accentText: '#184EA8',
@@ -123,8 +129,8 @@ function renderProductCard(product, index) {
         <img
           src="${assetPath(svgFilename)}"
           alt="Логотип ${product.name}"
-          width="178"
-          height="178"
+          width="112"
+          height="112"
         />
         <span class="format-badge">SVG · PNG</span>
       </div>
@@ -340,7 +346,7 @@ document.querySelector('#app').innerHTML = `
         <div class="section-heading merch-heading">
           <div>
             <p class="eyebrow">Фирменный мерч</p>
-            <h2 id="merch-title">Худи КриптоАРМ</h2>
+            <h2 id="merch-title">Худи бренда КриптоАРМ</h2>
           </div>
           <p>
             Варианты нанесения фирменной графики и примеры того,
