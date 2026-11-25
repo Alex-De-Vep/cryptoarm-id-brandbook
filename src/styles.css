@@ -848,6 +848,7 @@ svg {
 
 .video-carousel {
   min-width: 0;
+  padding-bottom: 16px;
 }
 
 .video-carousel-toolbar {

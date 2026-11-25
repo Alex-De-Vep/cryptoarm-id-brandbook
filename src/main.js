@@ -86,6 +86,15 @@ const products = [
 
 const videos = [
   {
+    id: 'ecosystem',
+    product: 'КриптоАРМ',
+    title: 'Живая экосистема',
+    description: 'Продукты КриптоАРМ.',
+    duration: '02:10',
+    width: 1920,
+    height: 1080,
+  },
+  {
     id: 'id-webauthn',
     product: 'КриптоАРМ ID',
     title: 'WebAuthn',
@@ -104,20 +113,20 @@ const videos = [
     height: 1920,
   },
   {
-    id: 'registration-center',
-    product: 'КриптоАРМ',
-    title: 'Центр регистрации',
-    description: 'Обзор сервиса.',
-    duration: '01:17',
-    width: 1920,
-    height: 1080,
-  },
-  {
     id: 'mobile-sign-encrypt',
     product: 'КриптоАРМ Mobile',
     title: 'Подпись и шифрование',
     description: 'Документы на смартфоне.',
     duration: '00:45',
+    width: 1920,
+    height: 1080,
+  },
+  {
+    id: 'registration-center',
+    product: 'КриптоАРМ',
+    title: 'Центр регистрации',
+    description: 'Обзор сервиса.',
+    duration: '01:17',
     width: 1920,
     height: 1080,
   },
