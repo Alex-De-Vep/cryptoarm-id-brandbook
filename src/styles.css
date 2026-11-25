@@ -834,6 +834,18 @@ svg {
   background: var(--soft-surface);
 }
 
+.videos-section {
+  padding-bottom: 24px;
+}
+
+.videos-section .section-heading {
+  margin-bottom: 24px;
+}
+
+.videos-section + .merch-section {
+  padding-top: 24px;
+}
+
 .video-carousel {
   min-width: 0;
 }
