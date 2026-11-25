@@ -834,13 +834,82 @@ svg {
   background: var(--soft-surface);
 }
 
-.videos-grid {
+.video-carousel {
+  min-width: 0;
+}
+
+.video-carousel-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.video-carousel-toolbar > p {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.video-carousel-controls {
+  flex-shrink: 0;
+  display: flex;
+  gap: 8px;
+}
+
+.carousel-button {
+  width: 44px;
+  height: 44px;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition);
+}
+
+.carousel-button:not(:disabled):hover {
+  border-color: var(--text);
+}
+
+.carousel-button:disabled {
+  color: var(--text-muted);
+  cursor: default;
+}
+
+.carousel-button svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.carousel-button-previous svg {
+  transform: rotate(180deg);
+}
+
+.videos-track {
+  --video-preview-height: clamp(320px, 32vw, 360px);
+  position: relative;
+  display: flex;
   gap: 20px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 4px;
+  scroll-behavior: smooth;
+  padding: 4px 4px 16px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-muted) var(--border);
 }
 
 .video-card {
+  flex: 0 0 auto;
+  width: min(calc(var(--video-preview-height) * 16 / 9 + 2px), 100%);
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -848,9 +917,15 @@ svg {
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   background: var(--surface);
+  scroll-snap-align: start;
+}
+
+.video-card-portrait {
+  width: calc(var(--video-preview-height) * 9 / 16 + 2px);
 }
 
 .video-preview {
+  flex-shrink: 0;
   aspect-ratio: 16 / 9;
   overflow: hidden;
   background: #181818;
@@ -858,7 +933,6 @@ svg {
 
 .video-card-portrait .video-preview {
   aspect-ratio: 9 / 16;
-  max-height: 520px;
 }
 
 .video-preview video {
@@ -872,7 +946,7 @@ svg {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 24px;
+  padding: 18px;
 }
 
 .video-meta {
@@ -891,7 +965,7 @@ svg {
 }
 
 .video-content h3 {
-  font-size: clamp(22px, 2.2vw, 30px);
+  font-size: 22px;
   line-height: 1.15;
   overflow-wrap: anywhere;
 }
@@ -912,6 +986,17 @@ svg {
   width: 100%;
   min-height: 44px;
   font-size: 14px;
+}
+
+.video-card-portrait .video-actions .button {
+  gap: 6px;
+  padding-inline: 8px;
+  font-size: 13px;
+}
+
+.video-card-portrait .video-actions .button svg {
+  width: 16px;
+  height: 16px;
 }
 
 .merch-product-grid {
@@ -1253,13 +1338,32 @@ svg {
   }
 
   .merch-product-grid,
-  .merch-lookbook-grid,
-  .videos-grid {
+  .merch-lookbook-grid {
     grid-template-columns: 1fr;
   }
 
   .video-content {
-    padding: 18px;
+    padding: 16px;
+  }
+
+  .videos-track {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .video-carousel-toolbar > p {
+    font-size: 12px;
+  }
+
+  .video-actions .button {
+    gap: 6px;
+    padding-inline: 8px;
+    font-size: 12px;
+  }
+
+  .video-actions .button svg {
+    width: 16px;
+    height: 16px;
   }
 
   .merch-lookbook-head {
@@ -1278,7 +1382,8 @@ svg {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
+  html,
+  .videos-track {
     scroll-behavior: auto;
   }
 

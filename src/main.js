@@ -466,7 +466,16 @@ document.querySelector('#app').innerHTML = `
           </div>
           <p>Демонстрации возможностей и сценарии работы. Смотрите ролики на странице или скачивайте для презентаций.</p>
         </div>
-        <div class="videos-grid">${videos.map(renderVideoCard).join('')}</div>
+        <div class="video-carousel" role="region" aria-roledescription="карусель" aria-label="Видео о продуктах">
+          <div class="video-carousel-toolbar">
+            <p>Листайте ролики по горизонтали</p>
+            <div class="video-carousel-controls">
+              <button class="carousel-button carousel-button-previous" type="button" aria-label="Предыдущее видео" aria-controls="videos-track" data-video-direction="-1" disabled>${icons.chevron}</button>
+              <button class="carousel-button" type="button" aria-label="Следующее видео" aria-controls="videos-track" data-video-direction="1">${icons.chevron}</button>
+            </div>
+          </div>
+          <div class="videos-track" id="videos-track" tabindex="0" aria-label="Лента видео, прокрутка по горизонтали">${videos.map(renderVideoCard).join('')}</div>
+        </div>
       </div>
     </section>
 
@@ -581,6 +590,44 @@ document.querySelector('#app').innerHTML = `
 
 const liveRegion = document.querySelector('#live-region');
 let copyFeedbackTimer;
+
+const videosTrack = document.querySelector('#videos-track');
+const videoCards = [...videosTrack.querySelectorAll('.video-card')];
+const previousVideo = document.querySelector('[data-video-direction="-1"]');
+const nextVideo = document.querySelector('[data-video-direction="1"]');
+
+function updateVideoNavigation() {
+  const maxScroll = videosTrack.scrollWidth - videosTrack.clientWidth;
+  previousVideo.disabled = videosTrack.scrollLeft <= 1;
+  nextVideo.disabled = videosTrack.scrollLeft >= maxScroll - 1;
+}
+
+function scrollVideoCarousel(direction) {
+  const maxScroll = videosTrack.scrollWidth - videosTrack.clientWidth;
+  const positions = videoCards.map((card) => Math.min(maxScroll, card.offsetLeft - videoCards[0].offsetLeft));
+  const current = videosTrack.scrollLeft;
+  const target = direction > 0
+    ? positions.find((position) => position > current + 2) ?? maxScroll
+    : [...positions].reverse().find((position) => position < current - 2) ?? 0;
+
+  videosTrack.scrollTo({
+    left: target,
+    behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+  });
+}
+
+previousVideo.addEventListener('click', () => scrollVideoCarousel(-1));
+nextVideo.addEventListener('click', () => scrollVideoCarousel(1));
+videosTrack.addEventListener('scroll', updateVideoNavigation, { passive: true });
+new ResizeObserver(updateVideoNavigation).observe(videosTrack);
+videosTrack.addEventListener('keydown', (event) => {
+  if (event.target !== videosTrack) return;
+  if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+    event.preventDefault();
+    scrollVideoCarousel(event.key === 'ArrowRight' ? 1 : -1);
+  }
+});
+updateVideoNavigation();
 
 document.addEventListener('change', (event) => {
   const select = event.target.closest('[data-size-select]');
