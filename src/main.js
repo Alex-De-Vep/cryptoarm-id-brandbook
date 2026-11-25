@@ -35,6 +35,30 @@ const products = [
     description: 'Логотип продукта PDn.',
   },
   {
+    id: 'documents',
+    name: 'Документы',
+    shortName: 'Документы',
+    description: 'Логотип продукта для работы с документами.',
+  },
+  {
+    id: 'ca',
+    name: 'CA',
+    shortName: 'CA',
+    description: 'Логотип продукта CA.',
+  },
+  {
+    id: 'server',
+    name: 'Server',
+    shortName: 'Server',
+    description: 'Логотип продукта Server.',
+  },
+  {
+    id: 'sign-encrypt',
+    name: 'Подпись и шифрование',
+    shortName: 'Подпись и шифрование',
+    description: 'Логотип продукта для электронной подписи и шифрования документов.',
+  },
+  {
     id: 'lunch',
     name: 'Корпоративные обеды',
     shortName: 'Корпоративные обеды',
@@ -58,6 +82,52 @@ const products = [
     accentText: '#184EA8',
     surface: '#EDF4FF',
   },
+];
+
+const videos = [
+  {
+    id: 'id-webauthn',
+    product: 'КриптоАРМ ID',
+    title: 'WebAuthn',
+    description: 'Демонстрация входа с помощью WebAuthn.',
+    duration: '00:20',
+    width: 1080,
+    height: 1920,
+  },
+  {
+    id: 'id-login',
+    product: 'КриптоАРМ ID',
+    title: 'Сценарий входа',
+    description: 'Сценарий входа в систему КриптоАРМ ID.',
+    duration: '00:25',
+    width: 1080,
+    height: 1920,
+  },
+  {
+    id: 'registration-center',
+    product: 'КриптоАРМ',
+    title: 'Центр регистрации',
+    description: 'Знакомство с Центром регистрации.',
+    duration: '01:17',
+    width: 1920,
+    height: 1080,
+  },
+  {
+    id: 'mobile-sign-encrypt',
+    product: 'КриптоАРМ Mobile',
+    title: 'Подпись и шифрование',
+    description: 'Подпись и шифрование документов в КриптоАРМ Mobile.',
+    duration: '00:45',
+    width: 1920,
+    height: 1080,
+  },
+];
+
+const mediaSections = [
+  { id: 'logos', title: 'Логотипы продуктов', description: `${products.length} продуктов · SVG и PNG` },
+  { id: 'colors', title: 'Фирменные цвета', description: 'Основная и акцентные палитры' },
+  { id: 'videos', title: 'Видео о продуктах', description: 'Демонстрации и сценарии работы' },
+  { id: 'merch', title: 'Фирменный мерч', description: 'Худи и примеры нанесения' },
 ];
 
 const palette = [
@@ -126,7 +196,7 @@ function renderProductCard(product, index) {
     <article class="product-card" aria-labelledby="product-${product.id}"
       ${product.accent ? `style="--product-accent: ${product.accent}; --product-accent-hover: ${product.accentHover}; --product-accent-text: ${product.accentText}; --product-surface: ${product.surface}; --product-button-text: var(--text);"` : ''}>
       <div class="product-preview">
-        <div class="product-index" aria-hidden="true">0${index + 1}</div>
+        <div class="product-index" aria-hidden="true">${String(index + 1).padStart(2, '0')}</div>
         <img
           src="${assetPath(svgFilename)}"
           alt="Логотип ${product.name}"
@@ -218,17 +288,59 @@ function renderColorCard(color) {
   `;
 }
 
+function renderVideoCard(video) {
+  const filename = `${video.id}.mp4`;
+  return `
+    <article class="video-card ${video.height > video.width ? 'video-card-portrait' : ''}" aria-labelledby="video-${video.id}">
+      <div class="video-preview">
+        <video
+          controls
+          playsinline
+          preload="none"
+          poster="${baseUrl}videos/${video.id}.jpg"
+          width="${video.width}"
+          height="${video.height}"
+          aria-label="${video.product} — ${video.title}"
+        >
+          <source src="${baseUrl}videos/${filename}" type="video/mp4" />
+          Ваш браузер не поддерживает просмотр видео. Скачайте ролик по ссылке ниже.
+        </video>
+      </div>
+      <div class="video-content">
+        <div class="video-meta"><span>${video.product}</span><span>MP4 · ${video.duration}</span></div>
+        <h3 id="video-${video.id}">${video.title}</h3>
+        <p>${video.description}</p>
+        <div class="video-actions">
+          <a
+            class="button button-secondary"
+            href="${baseUrl}videos/${filename}"
+            download="${filename}"
+            data-download-label="${video.product} — ${video.title}, MP4"
+            aria-label="Скачать видео ${video.product} — ${video.title}"
+          >${icons.arrowDown}<span>Скачать видео</span></a>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
 document.querySelector('#app').innerHTML = `
   <a class="skip-link" href="#content">Перейти к содержимому</a>
 
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="#top" aria-label="КриптоАРМ Brandbook — на главную">
+      <a class="brand" href="#top" aria-label="Брендбук КриптоАРМ — на главную">
         <img src="${assetPath('cryptoarm-id.svg')}" alt="" width="40" height="40" />
         <span>КриптоАРМ</span>
         <span class="brand-divider" aria-hidden="true"></span>
-        <span class="brand-section">Brandbook</span>
+        <span class="brand-section">Брендбук</span>
       </a>
+      <nav class="site-nav" aria-label="Разделы медиакита">
+        <a href="#logos">Логотипы</a>
+        <a href="#colors">Цвета</a>
+        <a href="#videos">Видео</a>
+        <a href="#merch">Мерч</a>
+      </nav>
     </div>
   </header>
 
@@ -237,44 +349,42 @@ document.querySelector('#app').innerHTML = `
       <div class="container">
         <div class="hero-panel">
           <div class="hero-copy">
-            <h1>Бренд-материалы КриптоАРМ</h1>
+            <p class="eyebrow">Медиакит компании</p>
+            <h1>Брендбук КриптоАРМ</h1>
             <p class="hero-description">
-              Всё необходимое для аккуратного использования бренда: оригинальные знаки,
-              прозрачные PNG и палитра интерфейса, мерч компании. 
+              Логотипы продуктов, фирменные цвета, видео и мерч — материалы
+              для презентаций, публикаций и коммуникаций компании.
             </p>
             <div class="hero-actions">
               <a class="button button-primary button-large" href="#logos">
-                Перейти к логотипам
+                Бренд-материалы
                 ${icons.chevron}
               </a>
+              <a class="text-link" href="#videos">Смотреть видео</a>
             </div>
           </div>
 
-          <div class="hero-showcase" aria-label="Продукты КриптоАРМ">
+          <div class="hero-showcase" aria-label="Состав медиакита КриптоАРМ">
             <div class="hero-showcase-head">
-              <span>Семейство продуктов</span>
+              <span>В медиаките</span>
               <span>2026</span>
             </div>
-            <div class="logo-cluster">
-              ${products
+            <div class="media-index">
+              ${mediaSections
                 .map(
-                  (product) => `
-                    <div class="cluster-item">
-                      <img
-                        src="${assetPath(productFilename(product, 'svg'))}"
-                        alt=""
-                        width="92"
-                        height="92"
-                      />
-                      <span>${product.shortName}</span>
-                    </div>`,
+                  (section, index) => `
+                    <a class="media-index-link" href="#${section.id}">
+                      <span class="media-index-number" aria-hidden="true">0${index + 1}</span>
+                      <span class="media-index-copy"><strong>${section.title}</strong><span>${section.description}</span></span>
+                      ${icons.chevron}
+                    </a>`,
                 )
                 .join('')}
             </div>
             <div class="hero-stats" aria-label="Состав материалов">
               <div><strong>${products.length}</strong><span>продуктов</span></div>
               <div><strong>${imageSizes.length}</strong><span>размеров изображений</span></div>
-              <div><strong>SVG</strong><span>без потери качества</span></div>
+              <div><strong>${videos.length}</strong><span>видео о продуктах</span></div>
             </div>
           </div>
         </div>
@@ -344,6 +454,19 @@ document.querySelector('#app').innerHTML = `
             ${oidcPalette.map(renderColorCard).join('')}
           </div>
         </section>
+      </div>
+    </section>
+
+    <section class="section videos-section" id="videos" aria-labelledby="videos-title">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Продукты в действии</p>
+            <h2 id="videos-title">Видео</h2>
+          </div>
+          <p>Демонстрации возможностей и сценарии работы. Смотрите ролики на странице или скачивайте для презентаций.</p>
+        </div>
+        <div class="videos-grid">${videos.map(renderVideoCard).join('')}</div>
       </div>
     </section>
 
@@ -446,9 +569,9 @@ document.querySelector('#app').innerHTML = `
     <div class="container footer-inner">
       <div class="footer-brand">
         <img src="${assetPath('cryptoarm-id.svg')}" alt="" width="36" height="36" />
-        <span>КриптоАРМ Brandbook</span>
+        <span>Брендбук КриптоАРМ</span>
       </div>
-      <p>Официальные логотипы и цвета продуктов</p>
+      <p>Медиакит компании: логотипы, цвета, видео и мерч</p>
       <a href="#top">Наверх <span aria-hidden="true">↑</span></a>
     </div>
   </footer>
