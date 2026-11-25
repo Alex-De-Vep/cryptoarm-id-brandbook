@@ -89,7 +89,7 @@ const videos = [
     id: 'id-webauthn',
     product: 'КриптоАРМ ID',
     title: 'WebAuthn',
-    description: 'Демонстрация входа с помощью WebAuthn.',
+    description: 'Вход без пароля.',
     duration: '00:20',
     width: 1080,
     height: 1920,
@@ -98,7 +98,7 @@ const videos = [
     id: 'id-login',
     product: 'КриптоАРМ ID',
     title: 'Сценарий входа',
-    description: 'Сценарий входа в систему КриптоАРМ ID.',
+    description: 'Вход в КриптоАРМ ID.',
     duration: '00:25',
     width: 1080,
     height: 1920,
@@ -107,7 +107,7 @@ const videos = [
     id: 'registration-center',
     product: 'КриптоАРМ',
     title: 'Центр регистрации',
-    description: 'Знакомство с Центром регистрации.',
+    description: 'Обзор сервиса.',
     duration: '01:17',
     width: 1920,
     height: 1080,
@@ -116,7 +116,7 @@ const videos = [
     id: 'mobile-sign-encrypt',
     product: 'КриптоАРМ Mobile',
     title: 'Подпись и шифрование',
-    description: 'Подпись и шифрование документов в КриптоАРМ Mobile.',
+    description: 'Документы на смартфоне.',
     duration: '00:45',
     width: 1920,
     height: 1080,
@@ -307,7 +307,7 @@ function renderVideoCard(video) {
         </video>
       </div>
       <div class="video-content">
-        <div class="video-meta"><span>${video.product}</span><span>MP4 · ${video.duration}</span></div>
+        <div class="video-meta"><span>${video.product}</span><span>${video.duration}</span></div>
         <h3 id="video-${video.id}">${video.title}</h3>
         <p>${video.description}</p>
         <div class="video-actions">

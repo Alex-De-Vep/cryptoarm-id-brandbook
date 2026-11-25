@@ -946,17 +946,17 @@ svg {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 18px;
+  padding: 12px;
 }
 
 .video-meta {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 8px 16px;
-  margin-bottom: 14px;
+  gap: 4px 8px;
+  margin-bottom: 6px;
   color: var(--text-secondary);
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .video-meta > span:first-child {
@@ -965,17 +965,17 @@ svg {
 }
 
 .video-content h3 {
-  font-size: 22px;
-  line-height: 1.15;
+  font-size: 16px;
+  line-height: 1.2;
   overflow-wrap: anywhere;
 }
 
 .video-content > p {
-  margin-top: 12px;
-  margin-bottom: 20px;
+  margin-top: 6px;
+  margin-bottom: 10px;
   color: var(--text-secondary);
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 12px;
+  line-height: 1.4;
 }
 
 .video-actions {
@@ -985,16 +985,12 @@ svg {
 .video-actions .button {
   width: 100%;
   min-height: 44px;
-  font-size: 14px;
-}
-
-.video-card-portrait .video-actions .button {
   gap: 6px;
-  padding-inline: 8px;
-  font-size: 13px;
+  padding-inline: 10px;
+  font-size: 12px;
 }
 
-.video-card-portrait .video-actions .button svg {
+.video-actions .button svg {
   width: 16px;
   height: 16px;
 }
@@ -1342,10 +1338,6 @@ svg {
     grid-template-columns: 1fr;
   }
 
-  .video-content {
-    padding: 16px;
-  }
-
   .videos-track {
     align-items: flex-start;
     gap: 12px;
@@ -1353,17 +1345,6 @@ svg {
 
   .video-carousel-toolbar > p {
     font-size: 12px;
-  }
-
-  .video-actions .button {
-    gap: 6px;
-    padding-inline: 8px;
-    font-size: 12px;
-  }
-
-  .video-actions .button svg {
-    width: 16px;
-    height: 16px;
   }
 
   .merch-lookbook-head {
